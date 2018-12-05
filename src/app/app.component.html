@@ -1,0 +1,112 @@
+<table [formGroup]="userForm">
+  <tbody>
+    <tr>
+      <td>Name</td>
+      <td><input class="namec" type="text" formControlName="name" /></td>
+      <td *ngIf="userForm.get('name').invalid && userForm.get('name').touched">
+        <p *ngIf="userForm.get('name').errors.required">
+          This filed is mandatory please provide...
+        </p>
+        <p *ngIf="userForm.get('name').errors.minlength">
+          Your name should be more than 3 chars
+        </p>
+        <p *ngIf="userForm.get('name').errors.nameError">
+          Your name should not consist special characters and spaces/number.
+        </p>
+      </td>
+    </tr>
+    <tr>
+      <td>Title</td>
+      <td><input type="radio" formControlName="title" value="Mr" /> Mr</td>
+      <td>
+        <input type="radio" formControlName="title" [value]="'Mrs'" /> Mrs
+      </td>
+    </tr>
+    <tr>
+      <td>Gender</td>
+      <td>
+        <input type="radio" formControlName="gender" [value]="'male'" />Male
+      </td>
+      <td>
+        <input type="radio" formControlName="gender" [value]="'female'" />Female
+      </td>
+    </tr>
+    <tr>
+      <td>Above 18</td>
+      <td><input type="checkbox" name="" id="" formControlName="adult" /></td>
+    </tr>
+    <tr>
+      <td>SSc</td>
+      <td><input type="checkbox" name="" id="" formControlName="ssc" /></td>
+    </tr>
+    <tr>
+      <td>Gradutaion</td>
+      <td>
+        <input type="checkbox" name="" id="" formControlName="graduation" />
+      </td>
+    </tr>
+    <tr>
+      <td>
+        <select name="" id="" formControlName="state">
+          <option
+            [value]="item"
+            *ngFor="
+              let item of [
+                'Andhra Pradesh',
+                'Telangana',
+                'Tamil Nadu',
+                'Kerala'
+              ]
+            "
+          >
+            {{ item }}</option
+          >
+        </select>
+      </td>
+      <td>
+        <select name="" id="" formControlName="district">
+          <option [value]="item" *ngFor="let item of current_dist">
+            {{ item }}</option
+          >
+        </select>
+      </td>
+    </tr>
+    <tr>
+      <td>Age</td>
+      <td><input type="range" max="100" min="0" formControlName="age" /></td>
+    </tr>
+    <tr>
+      <td>DOB</td>
+      <td>
+        <input
+          type="date"
+          [min]="minDate"
+          [max]="maxDate"
+          formControlName="date"
+        />
+      </td>
+    </tr>
+    <tr>
+      <td>Color</td>
+      <td><input type="color" name="" id="" formControlName="color" /></td>
+    </tr>
+    <tr>
+      <td>Credit Card</td>
+      <td><input type="text" name="" id="" formControlName="cc" /></td>
+      <td *ngIf="userForm.get('cc').invalid">
+        <p *ngIf="userForm.get('cc').errors.ccError">
+          Please provide valid credit card number
+        </p>
+        <p *ngIf="userForm.get('cc').errors.required">
+          Please provide value here..
+        </p>
+      </td>
+    </tr>
+    <tr>
+      <td></td>
+      <td><button (click)="submitData()">Submit`</button></td>
+    </tr>
+  </tbody>
+</table>
+
+<h1 [style.color]="userForm.get('color').value">{{ userForm.value | json }}</h1>
